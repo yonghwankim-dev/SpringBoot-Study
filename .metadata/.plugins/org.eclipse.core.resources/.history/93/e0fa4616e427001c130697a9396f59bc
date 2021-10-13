@@ -1,0 +1,9 @@
+package org.zerock.domain;
+
+@Getter
+@Setter
+@ToString
+@Entity
+public class Member {
+
+}

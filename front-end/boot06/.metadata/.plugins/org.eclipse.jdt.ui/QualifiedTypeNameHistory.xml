@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<<<<<<< HEAD
+=======
+    <fullyQualifiedTypeName name="java.util.Collection"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
+    <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
+    <fullyQualifiedTypeName name="org.springframework.data.querydsl.QuerydslPredicateExecutor"/>
+    <fullyQualifiedTypeName name="org.zerock.domain.Board"/>
+    <fullyQualifiedTypeName name="com.querydsl.core.BooleanBuilder"/>
+    <fullyQualifiedTypeName name="org.zerock.domain.QBoard"/>
+>>>>>>> 18b52f7909876c0db64b7f48891881e7080a73c8
+    <fullyQualifiedTypeName name="org.springframework.data.repository.core.support.DefaultCrudMethods"/>
+    <fullyQualifiedTypeName name="org.zerock.persistence.MemberRepository"/>
+    <fullyQualifiedTypeName name="org.zerock.persistence.ProfileRepository"/>
+    <fullyQualifiedTypeName name="org.zerock.domain.Member"/>
+    <fullyQualifiedTypeName name="org.zerock.domain.Profile"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Table"/>
+    <fullyQualifiedTypeName name="lombok.EqualsAndHashCode"/>
+    <fullyQualifiedTypeName name="lombok.Getter"/>
+    <fullyQualifiedTypeName name="lombok.Setter"/>
+    <fullyQualifiedTypeName name="lombok.ToString"/>
+    <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
+    <fullyQualifiedTypeName name="org.zerock.persistence.PDSBoardRepository"/>
+    <fullyQualifiedTypeName name="org.assertj.core.util.Arrays"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Modifying"/>
+    <fullyQualifiedTypeName name="org.zerock.PDSBoardTests"/>
+    <fullyQualifiedTypeName name="org.zerock.domain.PDSBoard"/>
+    <fullyQualifiedTypeName name="org.zerock.domain.PDSFile"/>
+<<<<<<< HEAD
+=======
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+>>>>>>> 18b52f7909876c0db64b7f48891881e7080a73c8
+    <fullyQualifiedTypeName name="org.hibernate.annotations.CreationTimestamp"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.UpdateTimestamp"/>
+    <fullyQualifiedTypeName name="javax.persistence.Id"/>
+    <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+    <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
+<<<<<<< HEAD
+=======
+    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+>>>>>>> 18b52f7909876c0db64b7f48891881e7080a73c8
+    <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+    <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
+    <fullyQualifiedTypeName name="org.springframework.data.repository.CrudRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.test.context.SpringBootTest"/>
+    <fullyQualifiedTypeName name="org.springframework.test.annotation.Commit"/>
+    <fullyQualifiedTypeName name="org.zerock.persistence.FreeBoardRepository"/>
+    <fullyQualifiedTypeName name="org.zerock.persistence.FreeBoardReplyRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="java.util.stream.IntStream"/>
+    <fullyQualifiedTypeName name="lombok.extern.java.Log"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="org.zerock.FreeBoardTests"/>
+    <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+    <fullyQualifiedTypeName name="org.zerock.domain.FreeBoardReply"/>
+<<<<<<< HEAD
+=======
+    <fullyQualifiedTypeName name="java.util.List"/>
+>>>>>>> 18b52f7909876c0db64b7f48891881e7080a73c8
+    <fullyQualifiedTypeName name="org.zerock.domain.FreeBoard"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Sort"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Sort.Direction"/>
+    <fullyQualifiedTypeName name="javax.persistence.FetchType"/>
+    <fullyQualifiedTypeName name="javax.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Test"/>
+<<<<<<< HEAD
+    <fullyQualifiedTypeName name="javax.persistence.Index"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Disabled"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+    <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.zerock.domain.MemberVO"/>
+    <fullyQualifiedTypeName name="java.sql.Timestamp"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+=======
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="javax.persistence.Index"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Disabled"/>
+>>>>>>> 18b52f7909876c0db64b7f48891881e7080a73c8
+</qualifiedTypeNameHistroy>

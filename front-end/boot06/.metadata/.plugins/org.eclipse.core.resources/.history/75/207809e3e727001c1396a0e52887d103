@@ -1,0 +1,6 @@
+package org.zerock.persistence;
+
+
+public class MemberRepository{
+
+}

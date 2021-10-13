@@ -1,0 +1,5 @@
+#Thu Sep 30 11:37:24 KST 2021
+__DEFAULT__=false
+org.eclipse.sdk.Eclipse.master=true
+org.eclipse.help.ui.localSearch.master=true
+expression=market

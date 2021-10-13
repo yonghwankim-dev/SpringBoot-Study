@@ -1,0 +1,41 @@
+package org.zerock;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.zerock.domain.Member;
+import org.zerock.persistence.MemberRepository;
+import org.zerock.persistence.ProfileRepository;
+
+import lombok.extern.java.Log;
+
+@SpringBootTest
+@Log
+@Commit	// 테스트 결과 commit
+class ProfileTests {
+	
+	@Autowired
+	MemberRepository memberRepo;
+	
+	ProfileRepository profileRepo;
+	
+	@Disabled
+	@Test
+	void testInsertMembers() {
+		IntStream.range(1, 101).forEach(i->{
+			Member member = new Member();
+			member.setUid("user"+i);
+			member.setUpw("pw"+i);
+			member.setUname("사용자"+i);
+			
+			memberRepo.save(member);
+		});
+	}
+
+}

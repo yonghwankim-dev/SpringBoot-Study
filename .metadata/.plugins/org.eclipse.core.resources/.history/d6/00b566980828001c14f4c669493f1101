@@ -1,0 +1,14 @@
+package org.zerock;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class FreeBoardTests {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

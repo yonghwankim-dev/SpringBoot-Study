@@ -1,0 +1,20 @@
+package org.zerock;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import lombok.extern.java.Log;
+
+@SpringBootTest
+@Log
+@Commit	// 테스트 결과 commit
+class ProfileTests {
+
+	@Test
+	void test() {
+		
+	}
+
+}

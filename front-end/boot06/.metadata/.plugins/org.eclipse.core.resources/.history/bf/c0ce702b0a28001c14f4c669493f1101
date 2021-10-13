@@ -1,0 +1,43 @@
+package org.zerock;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.zerock.domain.FreeBoard;
+import org.zerock.persistence.FreeBoardReplyRepository;
+import org.zerock.persistence.FreeBoardRepository;
+
+import lombok.extern.java.Log;
+
+@SpringBootTest
+@Log
+@Commit
+class FreeBoardTests {
+	@Autowired
+	FreeBoardRepository boardRepo;
+	
+	@Autowired
+	FreeBoardReplyRepository replyRepo;
+
+	// 게시물 샘플 데이터 생성
+	@Disabled
+	@Test
+	void insertDummy() {
+		IntStream.range(1, 200).forEach(i->{
+			FreeBoard board = new FreeBoard();
+			
+			board.setTitle("Free Board..." +i);
+			board.setContent("Free Content..."+i);
+			board.setWriter("user"+i%10);
+			
+			boardRepo.save(board);
+		});
+	}
+
+}

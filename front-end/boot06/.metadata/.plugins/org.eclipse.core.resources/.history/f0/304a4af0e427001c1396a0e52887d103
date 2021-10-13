@@ -1,0 +1,11 @@
+package org.zerock.domain;
+
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name="tbl_members")
+@EqualsAndHashCode(of="uid")
+public class Member {
+
+}

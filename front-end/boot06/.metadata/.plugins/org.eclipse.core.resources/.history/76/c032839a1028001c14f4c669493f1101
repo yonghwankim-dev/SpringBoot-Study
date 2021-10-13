@@ -1,0 +1,12 @@
+package org.zerock.persistence;
+
+import java.util.List;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.CrudRepository;
+import org.zerock.domain.FreeBoard;
+
+public interface FreeBoardRepository extends CrudRepository<FreeBoard, Long>{
+	// 특정 게시물번호보다 큰 게시물 탐색
+	public List<FreeBoard> findByBnoGreaterThan(Long bno, Pageable page);
+}

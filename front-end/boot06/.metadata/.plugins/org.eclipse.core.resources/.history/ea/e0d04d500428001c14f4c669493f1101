@@ -1,0 +1,21 @@
+package org.zerock.domain;
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name="tbl_freeboards")
+@EqualsAndHashCode(of="bno")
+public class FreeBoard {
+
+}
