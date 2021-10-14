@@ -1,9 +1,6 @@
 package org.zerock;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.stream.IntStream;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +51,7 @@ class WebBoardRepositoryTests {
 	}
 
 	// 제목에 "10"이 포함되는 게시물을 검색
+//	@Disabled
 	@Test
 	public void testList2() {
 		Pageable pageable = PageRequest.of(0, 20, Direction.DESC, "bno");

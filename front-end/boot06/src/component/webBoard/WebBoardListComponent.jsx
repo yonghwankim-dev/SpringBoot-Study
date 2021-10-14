@@ -10,10 +10,10 @@ class WebBoardListComponent extends Component{
         const size = queryStirng.parse(props.location.search).size;
 
         this.state = {
-            result : null,      // keyPoint
+            result : null,      
             prevPage : null,
             nextPage : null,
-            pageList : [],      // keyPoint
+            pageList : [],
             boards : [],
             message : null,
             page : (p===undefined || p<1) ? 1 : p,
@@ -27,7 +27,6 @@ class WebBoardListComponent extends Component{
 
     reloadWebBoardList = (page, size)=>{
         ApiService.fetchWebBoards(page, size).then(res=>{
-                                                    
                                                     this.setState({
                                                                     result : res.data,
                                                                     prevPage : res.data.prevPage,
@@ -86,7 +85,7 @@ class WebBoardListComponent extends Component{
                         this.state.pageList.map(page =>
                                                         <li key={page.pageNumber+1}>
                                                             {
-                                                                this.state.result.currentPageNum-1==page.pageNumber ? 
+                                                                this.state.result.currentPageNum-1===page.pageNumber ? 
                                                                     <a href={"list?page="+(page.pageNumber+1)}  style={{color:"red"}}>{page.pageNumber+1}</a>
                                                                     :
                                                                     <a href={"list?page="+(page.pageNumber+1)}>{page.pageNumber+1}</a>
