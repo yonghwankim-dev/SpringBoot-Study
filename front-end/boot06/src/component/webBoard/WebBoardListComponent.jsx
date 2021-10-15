@@ -6,22 +6,16 @@ class WebBoardListComponent extends Component{
     constructor(props){
         super(props);
 
-        const p = queryStirng.parse(props.location.search).page;
-        const size = queryStirng.parse(props.location.search).size;
-        const type = queryStirng.parse(props.location.search).type;
-        const keyword = queryStirng.parse(props.location.search).keyword;
-
         this.state = {
             result : null,      
             prevPage : null,
             nextPage : null,
             pageList : [],
             boards : [],
-            message : null,
-            page : (p===undefined || p<1) ? 1 : p,
-            size : (size===undefined || size<10) ? 10 : size,
-            type : (type===undefined) ? "" : type,
-            keyword : (keyword===undefined) ? "" : keyword,
+            page : 1,
+            size : 10,
+            type : "",
+            keyword : "",
         }
         
     }
@@ -30,37 +24,38 @@ class WebBoardListComponent extends Component{
         this.reloadWebBoardList(this.state.page, this.state.size, this.state.type, this.state.keyword);
     }
 
-    reloadWebBoardList = (page, size, type, keyword)=>{
-        ApiService.fetchWebBoards(page, size, type, keyword).then(res=>{
-                                                    this.setState({
-                                                                    result : res.data,
-                                                                    prevPage : res.data.prevPage,
-                                                                    nextPage : res.data.nextPage,
-                                                                    pageList : res.data.pageList,
-                                                                    boards:res.data.result.content
-                                                                    })
-
-                                        })
-                                        .catch(err=>{
-                                            console.log("reloadWebBoardList() Error!",err);                        
-                                        });
+    reloadWebBoardList = (page=1, size=10, type="", keyword="")=>{
+        ApiService.fetchWebBoards(page, size, type, keyword)
+                    .then(res=>{
+                        this.setState({
+                                        result : res.data,
+                                        prevPage : res.data.prevPage,
+                                        nextPage : res.data.nextPage,
+                                        pageList : res.data.pageList,
+                                        boards:res.data.result.content
+                                    })
+                    })
+                    .catch(err=>{console.log("reloadWebBoardList() Error!",err);});
+        
     }
 
-    onSubmitSearch = (e)=>{
-        e.preventDefault();
-        
-        const page = e.target.page.value;
-        const size = e.target.size.value;
-        const type = e.target.searchType.value;
-        const keyword = e.target.searchKeyword.value;
-        
-        this.reloadWebBoardList(page, size, type, keyword);
+    onChangePage = (p)=>{
+        this.setState({page : p});
+        this.reloadWebBoardList(p,this.state.size, this.state.type, this.state.keyword);
+    }
+    onChangeType = (e)=>{
+        this.setState({type : e.target.value});
+    }
+    onChangeKeyword = (e)=>{
+        this.setState({keyword : e.target.value});
+    }
+    onClickSearch = ()=>{
+        this.reloadWebBoardList(this.state.page, this.state.size, this.state.type, this.state.keyword);
     }
 
     render(){
         return(
             <>
-            <form id="f1" method="get" onSubmit={this.onSubmitSearch}>
             <div>
                 <h2>WebBoard List</h2>
                 <table>
@@ -92,14 +87,14 @@ class WebBoardListComponent extends Component{
 
                 {/* search */}
                 <div>
-                    <select name="searchType" defaultValue={this.state.type}>
-                        <option>--</option>
+                    <select name="searchType" onChange={this.onChangeType}>
+                        <option value="">--</option>
                         <option value='t'>Title</option>
                         <option value='w'>Writer</option>
                         <option value='c'>Content</option>
                     </select>
-                    <input type="text" name="searchKeyword" defaultValue={this.state.keyword}/>
-                    <button id="searchBtn" type="submit">Search</button>
+                    <input type="text" onChange={this.onChangeKeyword}/>
+                    <button onClick={this.onClickSearch}>Search</button>
                 </div>
             </div>
             <div>
@@ -107,7 +102,7 @@ class WebBoardListComponent extends Component{
                 <ul>                 
                     {
                         /* PREV 버튼 */
-                        this.state.prevPage===null ? null : <li><a href={"list?page="+(this.state.prevPage.pageNumber+1)}>PREV {this.state.prevPage.pageNumber+1}</a></li>
+                        this.state.prevPage===null ? null : <li><button onClick={()=>{this.onChangePage(this.state.prevPage.pageNumber+1)}}>PREV {this.state.prevPage.pageNumber+1}</button></li>
                     }
                     {
                         /* 페이지 번호 버튼 */
@@ -115,9 +110,9 @@ class WebBoardListComponent extends Component{
                                                         <li key={page.pageNumber+1}>
                                                             {
                                                                 this.state.result.currentPageNum-1===page.pageNumber ? 
-                                                                    <a href={"list?page="+(page.pageNumber+1)} style={{color:"red"}}>{page.pageNumber+1}</a>
+                                                                    <button onClick={()=>{this.onChangePage(page.pageNumber+1)}} style={{color:"red"}}>{page.pageNumber+1}</button>
                                                                     :
-                                                                    <a href={"list?page="+(page.pageNumber+1)}>{page.pageNumber+1}</a>
+                                                                    <button onClick={()=>{this.onChangePage(page.pageNumber+1)}}>{page.pageNumber+1}</button>
                                                                     
                                                             }
                                                         </li> 
@@ -126,17 +121,11 @@ class WebBoardListComponent extends Component{
                     }
                     {
                         /* NEXT 버튼 */
-                        this.state.nextPage===null ? null : <li><a href={"list?page="+(this.state.nextPage.pageNumber+1)}>NEXT {this.state.nextPage.pageNumber+1}</a></li>
+                        this.state.nextPage===null ? null : <li><button onClick={()=>{this.onChangePage(this.state.nextPage.pageNumber+1)}}>NEXT {this.state.nextPage.pageNumber+1}</button></li>
                     }
                 </ul>
             </div>
-            
-            
-                    <input type="hidden" name="page" value={this.state.page}/>
-                    <input type="hidden" name="size" value={this.state.size}/>
-                    <input type="hidden" name="type" value={this.state.type}/>
-                    <input type="hidden" name="keyword" value={this.state.keyword}/>
-            </form>
+
             </>
         );
     }
