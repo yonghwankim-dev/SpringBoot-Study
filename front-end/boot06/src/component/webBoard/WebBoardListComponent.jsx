@@ -6,39 +6,51 @@ class WebBoardListComponent extends Component{
     constructor(props){
         super(props);
 
-        const p = queryStirng.parse(props.location.search).page;
-        const size = queryStirng.parse(props.location.search).size;
-
         this.state = {
             result : null,      
             prevPage : null,
             nextPage : null,
             pageList : [],
             boards : [],
-            message : null,
-            page : (p===undefined || p<1) ? 1 : p,
-            size : (size===undefined || size<10) ? 10 : size
+            page : 1,
+            size : 10,
+            type : "",
+            keyword : "",
         }
+        
     }
 
     componentDidMount(){
-        this.reloadWebBoardList(this.state.page, this.state.size);
+        this.reloadWebBoardList(this.state.page, this.state.size, this.state.type, this.state.keyword);
     }
 
-    reloadWebBoardList = (page, size)=>{
-        ApiService.fetchWebBoards(page, size).then(res=>{
-                                                    this.setState({
-                                                                    result : res.data,
-                                                                    prevPage : res.data.prevPage,
-                                                                    nextPage : res.data.nextPage,
-                                                                    pageList : res.data.pageList,
-                                                                    boards:res.data.result.content
-                                                                    })
+    reloadWebBoardList = (page=1, size=10, type="", keyword="")=>{
+        ApiService.fetchWebBoards(page, size, type, keyword)
+                    .then(res=>{
+                        this.setState({
+                                        result : res.data,
+                                        prevPage : res.data.prevPage,
+                                        nextPage : res.data.nextPage,
+                                        pageList : res.data.pageList,
+                                        boards:res.data.result.content
+                                    })
+                    })
+                    .catch(err=>{console.log("reloadWebBoardList() Error!",err);});
+        
+    }
 
-                                        })
-                                        .catch(err=>{
-                                            console.log("reloadWebBoardList() Error!",err);                        
-                                        });
+    onChangePage = (p)=>{
+        this.setState({page : p});
+        this.reloadWebBoardList(p,this.state.size, this.state.type, this.state.keyword);
+    }
+    onChangeType = (e)=>{
+        this.setState({type : e.target.value});
+    }
+    onChangeKeyword = (e)=>{
+        this.setState({keyword : e.target.value});
+    }
+    onClickSearch = ()=>{
+        this.reloadWebBoardList(this.state.page, this.state.size, this.state.type, this.state.keyword);
     }
 
     render(){
@@ -72,13 +84,25 @@ class WebBoardListComponent extends Component{
                         }
                     </tbody>
                 </table>
+
+                {/* search */}
+                <div>
+                    <select name="searchType" onChange={this.onChangeType}>
+                        <option value="">--</option>
+                        <option value='t'>Title</option>
+                        <option value='w'>Writer</option>
+                        <option value='c'>Content</option>
+                    </select>
+                    <input type="text" onChange={this.onChangeKeyword}/>
+                    <button onClick={this.onClickSearch}>Search</button>
+                </div>
             </div>
             <div>
                 {/* pagination */}
                 <ul>                 
                     {
                         /* PREV 버튼 */
-                        this.state.prevPage===null ? null : <li><a href={"list?page="+(this.state.prevPage.pageNumber+1)}>PREV {this.state.prevPage.pageNumber+1}</a></li>
+                        this.state.prevPage===null ? null : <li><button onClick={()=>{this.onChangePage(this.state.prevPage.pageNumber+1)}}>PREV {this.state.prevPage.pageNumber+1}</button></li>
                     }
                     {
                         /* 페이지 번호 버튼 */
@@ -86,9 +110,10 @@ class WebBoardListComponent extends Component{
                                                         <li key={page.pageNumber+1}>
                                                             {
                                                                 this.state.result.currentPageNum-1===page.pageNumber ? 
-                                                                    <a href={"list?page="+(page.pageNumber+1)}  style={{color:"red"}}>{page.pageNumber+1}</a>
+                                                                    <button onClick={()=>{this.onChangePage(page.pageNumber+1)}} style={{color:"red"}}>{page.pageNumber+1}</button>
                                                                     :
-                                                                    <a href={"list?page="+(page.pageNumber+1)}>{page.pageNumber+1}</a>
+                                                                    <button onClick={()=>{this.onChangePage(page.pageNumber+1)}}>{page.pageNumber+1}</button>
+                                                                    
                                                             }
                                                         </li> 
                                                         
@@ -96,10 +121,11 @@ class WebBoardListComponent extends Component{
                     }
                     {
                         /* NEXT 버튼 */
-                        this.state.nextPage===null ? null : <li><a href={"list?page="+(this.state.nextPage.pageNumber+1)}>NEXT {this.state.nextPage.pageNumber+1}</a></li>
+                        this.state.nextPage===null ? null : <li><button onClick={()=>{this.onChangePage(this.state.nextPage.pageNumber+1)}}>NEXT {this.state.nextPage.pageNumber+1}</button></li>
                     }
                 </ul>
             </div>
+
             </>
         );
     }
