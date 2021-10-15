@@ -48,7 +48,6 @@ class WebBoardListComponent extends Component{
 
     onSubmitSearch = (e)=>{
         e.preventDefault();
-
         
         const page = e.target.page.value;
         const size = e.target.size.value;
