@@ -8,6 +8,8 @@ class WebBoardListComponent extends Component{
 
         const p = queryStirng.parse(props.location.search).page;
         const size = queryStirng.parse(props.location.search).size;
+        const type = queryStirng.parse(props.location.search).type;
+        const keyword = queryStirng.parse(props.location.search).keyword;
 
         this.state = {
             result : null,      
@@ -17,16 +19,19 @@ class WebBoardListComponent extends Component{
             boards : [],
             message : null,
             page : (p===undefined || p<1) ? 1 : p,
-            size : (size===undefined || size<10) ? 10 : size
+            size : (size===undefined || size<10) ? 10 : size,
+            type : (type===undefined) ? "" : type,
+            keyword : (keyword===undefined) ? "" : keyword,
         }
+        
     }
 
     componentDidMount(){
-        this.reloadWebBoardList(this.state.page, this.state.size);
+        this.reloadWebBoardList(this.state.page, this.state.size, this.state.type, this.state.keyword);
     }
 
-    reloadWebBoardList = (page, size)=>{
-        ApiService.fetchWebBoards(page, size).then(res=>{
+    reloadWebBoardList = (page, size, type, keyword)=>{
+        ApiService.fetchWebBoards(page, size, type, keyword).then(res=>{
                                                     this.setState({
                                                                     result : res.data,
                                                                     prevPage : res.data.prevPage,
@@ -41,9 +46,22 @@ class WebBoardListComponent extends Component{
                                         });
     }
 
+    onSubmitSearch = (e)=>{
+        e.preventDefault();
+
+        
+        const page = e.target.page.value;
+        const size = e.target.size.value;
+        const type = e.target.searchType.value;
+        const keyword = e.target.searchKeyword.value;
+        
+        this.reloadWebBoardList(page, size, type, keyword);
+    }
+
     render(){
         return(
             <>
+            <form id="f1" method="get" onSubmit={this.onSubmitSearch}>
             <div>
                 <h2>WebBoard List</h2>
                 <table>
@@ -72,6 +90,18 @@ class WebBoardListComponent extends Component{
                         }
                     </tbody>
                 </table>
+
+                {/* search */}
+                <div>
+                    <select name="searchType" defaultValue={this.state.type}>
+                        <option>--</option>
+                        <option value='t'>Title</option>
+                        <option value='w'>Writer</option>
+                        <option value='c'>Content</option>
+                    </select>
+                    <input type="text" name="searchKeyword" defaultValue={this.state.keyword}/>
+                    <button id="searchBtn" type="submit">Search</button>
+                </div>
             </div>
             <div>
                 {/* pagination */}
@@ -86,9 +116,10 @@ class WebBoardListComponent extends Component{
                                                         <li key={page.pageNumber+1}>
                                                             {
                                                                 this.state.result.currentPageNum-1===page.pageNumber ? 
-                                                                    <a href={"list?page="+(page.pageNumber+1)}  style={{color:"red"}}>{page.pageNumber+1}</a>
+                                                                    <a href={"list?page="+(page.pageNumber+1)} style={{color:"red"}}>{page.pageNumber+1}</a>
                                                                     :
                                                                     <a href={"list?page="+(page.pageNumber+1)}>{page.pageNumber+1}</a>
+                                                                    
                                                             }
                                                         </li> 
                                                         
@@ -100,6 +131,13 @@ class WebBoardListComponent extends Component{
                     }
                 </ul>
             </div>
+            
+            
+                    <input type="hidden" name="page" value={this.state.page}/>
+                    <input type="hidden" name="size" value={this.state.size}/>
+                    <input type="hidden" name="type" value={this.state.type}/>
+                    <input type="hidden" name="keyword" value={this.state.keyword}/>
+            </form>
             </>
         );
     }
