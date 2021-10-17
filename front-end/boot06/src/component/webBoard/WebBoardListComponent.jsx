@@ -53,11 +53,18 @@ class WebBoardListComponent extends Component{
         this.reloadWebBoardList(this.state.page, this.state.size, this.state.type, this.state.keyword);
     }
 
+    onClickRegister = ()=>{
+        this.props.history.push("/boards/register");
+    }
+
     render(){
         return(
             <>
             <div>
                 <h2>WebBoard List</h2>
+                <div>
+                    <button onClick={()=>{this.onClickRegister()}}>Register</button>
+                </div>
                 <table>
                     <thead>
                         <tr>
