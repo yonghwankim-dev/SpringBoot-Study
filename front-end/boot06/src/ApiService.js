@@ -15,6 +15,25 @@ class ApiService{
     viewWebBoard(bno){
         return axios.get(BOARD_API_BASE_URL+"/view?bno="+bno);
     }
+
+    fetchModifyWebBoard(bno){
+        return axios.get(BOARD_API_BASE_URL+"/modify?bno="+bno);
+    }
+
+    modifyWebBoard(board){
+        return axios.post(BOARD_API_BASE_URL+"/modify",null,{params : 
+            {
+                bno : board.bno,
+                title : board.title,
+                content : board.content
+            }});
+    }
+    
+    deleteWebBoard(bno){
+        return axios.post(BOARD_API_BASE_URL+"/delete",null,{params : {
+            bno : bno
+        }});
+    }
     
 }
 

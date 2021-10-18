@@ -10,9 +10,8 @@ class WebBoardViewComponent extends Component{
         const b = queryString.parse(this.props.location.search).bno
 
         this.state = {
-            bno : b,
             board : {
-                bno : 0,
+                bno : b,
                 title : "",
                 content : "",
                 writer : "",
@@ -22,7 +21,7 @@ class WebBoardViewComponent extends Component{
     }
 
     componentDidMount(){
-        this.reloadWebBoardView(this.state.bno);
+        this.reloadWebBoardView(this.state.board.bno);
     }
     
     reloadWebBoardView = (bno)=>{
@@ -36,7 +35,7 @@ class WebBoardViewComponent extends Component{
     }
 
     onClickModify = ()=>{
-        this.props.history.push("/boards/modify");
+        this.props.history.push("/boards/modify?bno="+this.state.board.bno);
     }
 
     onClickGoList = ()=>{

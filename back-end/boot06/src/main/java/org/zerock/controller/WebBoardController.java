@@ -75,4 +75,50 @@ public class WebBoardController {
 		}	
 	}
 	
+	@GetMapping("/modify")
+	public Optional<WebBoard> fetchModify(Long bno) {
+		log.info("FETCH MODIFY BNO: " + bno);
+		
+		Optional<WebBoard> result = repo.findById(bno);
+		
+		if(result.isPresent())
+		{
+			return result;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	@PostMapping("/modify")
+	public String modify(Long bno, String title, String content) {
+		log.info("MODIFY BNO: "+bno);
+		log.info("MODIFY Title: "+title);
+		log.info("MODIFY Content: "+content);
+		
+		Optional<WebBoard> result = repo.findById(bno);
+		
+		if(result.isPresent() && !title.equals("") && !content.equals(""))
+		{
+			WebBoard origin = result.get();
+			origin.setTitle(title);
+			origin.setContent(content);
+			repo.save(origin);
+			return "success";
+		}
+		else
+		{
+			return "fail";
+		}
+	
+	}
+	
+	@PostMapping("/delete")
+	public String delete(Long bno) {
+		log.info("DELETE BNO: " + bno);
+		
+		repo.deleteById(bno);
+		return "success";
+	}
 }

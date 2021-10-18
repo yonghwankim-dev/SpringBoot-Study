@@ -61,7 +61,13 @@ class WebBoardListComponent extends Component{
         this.setState({keyword : e.target.value});
     }
     onClickSearch = ()=>{
-        this.reloadWebBoardList(this.state.page, this.state.size, this.state.type, this.state.keyword);
+        this.setState({page : 1})        
+        this.reloadWebBoardList(1, this.state.size, this.state.type, this.state.keyword);
+    }
+
+    onClickAllView = ()=>{
+        window.localStorage.clear();
+        window.location.reload();
     }
 
     onClickRegister = ()=>{
@@ -78,6 +84,7 @@ class WebBoardListComponent extends Component{
             <div>
                 <h2>WebBoard List</h2>
                 <div>
+                    <button onClick={()=>{this.onClickAllView()}}>All View</button>
                     <button onClick={()=>{this.onClickRegister()}}>Register</button>
                 </div>
                 <table>
