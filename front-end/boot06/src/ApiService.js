@@ -11,6 +11,10 @@ class ApiService{
     registerWebBoard(title, content, writer){
         return axios.post(BOARD_API_BASE_URL + "/register",null,{params : {title : title, content : content, writer : writer}});
     }
+
+    viewWebBoard(bno){
+        return axios.get(BOARD_API_BASE_URL+"/view?bno="+bno);
+    }
     
 }
 

@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,6 +56,23 @@ public class WebBoardController {
 			repo.save(vo);	
 			return "success";
 		}
+	}
+	
+	@GetMapping("/view")
+	public Optional<WebBoard> view(Long bno) {
+		log.info("BNO : " + bno);
+		
+		
+		Optional<WebBoard> result = repo.findById(bno);
+		
+		if(result.isPresent())
+		{
+			return result;
+		}
+		else
+		{
+			return null;
+		}	
 	}
 	
 }
