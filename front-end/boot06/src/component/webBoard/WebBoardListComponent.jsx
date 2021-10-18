@@ -1,27 +1,39 @@
 import React, {Component} from 'react';
 import ApiService from "../../ApiService";
-import queryStirng from 'query-string';
-
+import change_date from '../../function/change_date';
 class WebBoardListComponent extends Component{
     constructor(props){
         super(props);
 
+        const {page,size,type,keyword} = localStorage;
+    
         this.state = {
             result : null,      
             prevPage : null,
             nextPage : null,
             pageList : [],
             boards : [],
-            page : 1,
-            size : 10,
-            type : "",
-            keyword : "",
+            page : page===null || page===undefined ? 1 : page,
+            size : size===null || size===undefined ? 10 : size,
+            type : type===null || type===undefined ? "" : type,
+            keyword : keyword===null || type===undefined  ? "" : keyword
         }
-        
+    }
+
+    handleWebBoardSubmit = ()=>{
+        const {page, size, type, keyword} = this.state;
+        localStorage.setItem('page',page);
+        localStorage.setItem('size',size);
+        localStorage.setItem('type',type);
+        localStorage.setItem('keyword',keyword);
     }
 
     componentDidMount(){
         this.reloadWebBoardList(this.state.page, this.state.size, this.state.type, this.state.keyword);
+    }
+
+    componentDidUpdate(){
+        this.handleWebBoardSubmit();
     }
 
     reloadWebBoardList = (page=1, size=10, type="", keyword="")=>{
@@ -36,7 +48,6 @@ class WebBoardListComponent extends Component{
                                     })
                     })
                     .catch(err=>{console.log("reloadWebBoardList() Error!",err);});
-        
     }
 
     onChangePage = (p)=>{
@@ -55,6 +66,10 @@ class WebBoardListComponent extends Component{
 
     onClickRegister = ()=>{
         this.props.history.push("/boards/register");
+    }
+
+    onClickView = (bno)=>{
+        this.props.history.push("/boards/view?bno="+bno);
     }
 
     render(){
@@ -81,11 +96,11 @@ class WebBoardListComponent extends Component{
                             this.state.boards.map( board=>
                                     <tr key={board.bno}>
                                         <td>{board.bno}</td>
-                                        <td>{board.title}</td>
+                                        <td onClick={()=>{this.onClickView(board.bno)}} style={{cursor:'pointer'}}>{board.title}</td>
                                         <td>{board.writer}</td>
                                         <td>{board.content}</td>
-                                        <td>{board.regdate}</td>
-                                        <td>{board.updatedate}</td>
+                                        <td>{change_date(board.regdate)}</td>
+                                        <td>{change_date(board.updatedate)}</td>
                                     </tr>
                                 )
                         }
@@ -94,13 +109,13 @@ class WebBoardListComponent extends Component{
 
                 {/* search */}
                 <div>
-                    <select name="searchType" onChange={this.onChangeType}>
+                    <select name="searchType" onChange={this.onChangeType} value={this.state.type}>
                         <option value="">--</option>
                         <option value='t'>Title</option>
                         <option value='w'>Writer</option>
                         <option value='c'>Content</option>
                     </select>
-                    <input type="text" onChange={this.onChangeKeyword}/>
+                    <input type="text" onChange={this.onChangeKeyword} value={this.state.keyword}/>
                     <button onClick={this.onClickSearch}>Search</button>
                 </div>
             </div>
