@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ApiService from "../../ApiService";
+import ApiService from '../../API/ApiService';
 import change_date from '../../function/change_date';
 class WebBoardListComponent extends Component{
     constructor(props){

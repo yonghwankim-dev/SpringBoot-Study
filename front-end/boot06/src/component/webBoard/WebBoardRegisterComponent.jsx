@@ -1,5 +1,5 @@
 import { Component } from "react";
-import ApiService from "../../ApiService";
+import ApiService from "../../API/ApiService";
 
 
 class WebBoardRegisterComponent extends Component{

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import queryString from 'query-string';
-import ApiService from "../../ApiService";
+import ApiService from "../../API/ApiService";
 import change_date from "../../function/change_date";
 
 class WebBoardModifyComponent extends Component{
